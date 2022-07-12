@@ -46,14 +46,9 @@ public class BoardServiceImpl implements BoardService {
 	 * @throws BoardReigstException
 	 */
 	@Override
-	public void registBoard(BoardDTO board) throws BoardRegistException {
+	public void registBoard(BoardDTO board) throws BoardRegistException{
 		
-		int result = mapper.insertBoard(board);
-		
-        if(!(result > 0)) {
-			
-			throw new BoardRegistException("공지사항 등록에 실패하셨습니다.");
-		}
+		mapper.registBoard(board);
 	}
 	
 	

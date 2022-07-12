@@ -14,11 +14,26 @@
 	if(message != null && message !== '') {
 		alert(message);
 	}
+	
+
+	if(document.getElementById("writeBoard")) {
+		const $writeBoard = document.getElementById("writeBoard");
+		$writeBoard.onclick = function() {
+			location.href = "/board/boardRegist";
+			
+			console.log("값 확인");
+		}
+	}
+	
+	
+
 </script>
-</head>
+
 <link href="${pageContext.request.contextPath}/resources/css/reset.css" rel="stylesheet" type="text/css">
 <link href="${pageContext.request.contextPath}/resources/css/board-regist.css" rel="stylesheet" type="text/css">
 <script src="${ pageContext.servletContext.contextPath }/resources/js/event.js"></script>
+</head>
+
 <body>
     <div class="main">
         <h2 align="center">게시글 등록</h2>
@@ -39,6 +54,7 @@
                     <tr>
                         <th width="200px" height="50px">작성일</th>
                         <td><input type="text" size="100" name="createdDate"></td>
+                        <td><input type="hidden" size="100" name="no"></td>
                     </tr>
                     <tr>
                         <th width="200px" height="545px">내용</th>
