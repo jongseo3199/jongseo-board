@@ -6,8 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.jongseo.board.exception.BoardRegistException;
@@ -65,27 +68,53 @@ public class BoardController {
 	
 	
 	
-	/* @PostMapping("/boardRegist") */
-	
-	@RequestMapping(value="regist", method=RequestMethod.POST)
-	public String registBoard(BoardDTO board, RedirectAttributes rttr) throws BoardRegistException {
+	 
+	 @RequestMapping(value="regist", method=RequestMethod.POST)
+	 public String registBoard(BoardDTO board, RedirectAttributes rttr) throws
+	  BoardRegistException {
 	  
-	  System.out.println("값 1111:"+board.toString());
+	  System.out.println("값 1111:");
 	  
-		/*
-		 * boardService.registBoard(board);
-		 * 
-		 * rttr.addFlashAttribute("message", "공지사항 등록에 성공하셨습니다.");
-		 */
+	  int no = board.getNo();
 	  
-	  System.out.println("값 2222"); 
-      
-	  //return "redirect:/board/list";
+	  boardService.registBoard(board);
+	  
+	  rttr.addFlashAttribute("message", "공지사항 등록에 성공하셨습니다.");
+	  
 	  return "/board/list";
 	  
 	  
 	  }
 	 
+	
+	/*
+	 * @RequestMapping(value="regist", method=RequestMethod.POST) public
+	 * ModelAndView registBoard(BoardDTO board) throws Exception { ModelAndView mav
+	 * = new ModelAndView("redirect:/board/list"); boardService.insertBoard(board);
+	 * return mav;
+	 * 
+	 * }
+	 */
+	
+	 
+	 
+	 
+	 
+	 /*
+	  * 게시글 상세 보기
+	  * 
+	  * */
+	 @RequestMapping(value="detail", method=RequestMethod.POST)
+	 public String selectBoardDetail(@RequestParam int no, Model model) {
+			
+			System.out.println("no : " + no);
+			
+			BoardDTO boardDetail = boardService.selectBoardDetail(no);
+			
+			model.addAttribute("detail", boardDetail);
+			
+			return "/board/boardDetail";
+		}
 	
 	
 }

@@ -45,10 +45,46 @@ public class BoardServiceImpl implements BoardService {
 	 * @param board
 	 * @throws BoardReigstException
 	 */
+	/*
+	 * @Override public void registBoard(BoardDTO board) throws
+	 * BoardRegistException{
+	 * 
+	 * mapper.registBoard(board); }
+	 */
 	@Override
 	public void registBoard(BoardDTO board) throws BoardRegistException{
 		
-		mapper.registBoard(board);
+         int result = mapper.insertBoard(board);
+		
+		if(!(result > 0)) {
+			
+			throw new BoardRegistException("공지사항 등록에 실패하셨습니다.");
+		}
+	}
+
+	@Override
+	public void insertBoard(BoardDTO board) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	
+	
+	/*
+	 * 게시판 상세보기
+	 * */
+	@Override
+	public BoardDTO selectBoardDetail(int no) {
+		
+		BoardDTO boardDetail = null;
+		
+		int result = mapper.incrementBoardCount(no);
+		
+		if(result > 0) {
+			boardDetail = mapper.selectBoardDetail(no);
+		}
+		
+		return boardDetail;
 	}
 	
 	

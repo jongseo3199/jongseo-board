@@ -12,7 +12,9 @@ window.onload = function(){
 	}
 	
 	
-	
+	function aa(){
+		document.f.submit();
+	}
 	
 	
 }

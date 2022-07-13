@@ -40,7 +40,7 @@
                     </tr>
                    <c:forEach items="${ boardList }" var="board">
 					<tr>
-						<%-- <td><c:out value="${ board.no }" /></td> --%>
+					    <td><c:out value="${ board.no }" /></td> 
 						<td><c:out value="${ board.title }" /></td>
 						<td><c:out value="${ board.writer }" /></td>
 						<td><c:out value="${ board.createdDate}" /></td>

@@ -4,7 +4,7 @@ import java.sql.Date;
 
 public class BoardDTO {
 
-	//private int no;
+	private int no;
 	private String title;
 	private String writer;
 	private Date createdDate;
@@ -19,10 +19,9 @@ public class BoardDTO {
 
 
 
-	//public BoardDTO(int no, String title, String writer, Date createdDate, int count, String body) {
-	public BoardDTO(String title, String writer, Date createdDate, int count, String body) {
+	public BoardDTO(int no, String title, String writer, Date createdDate, int count, String body) {
 		super();
-		//this.no = no;
+		this.no = no;
 		this.title = title;
 		this.writer = writer;
 		this.createdDate = createdDate;
@@ -32,13 +31,15 @@ public class BoardDTO {
 
 
 
-	/*
-	 * public int getNo() { return no; }
-	 * 
-	 * 
-	 * 
-	 * public void setNo(int no) { this.no = no; }
-	 */
+	public int getNo() {
+		return no;
+	}
+
+
+
+	public void setNo(int no) {
+		this.no = no;
+	}
 
 
 
@@ -104,13 +105,12 @@ public class BoardDTO {
 
 	@Override
 	public String toString() {
-		/*
-		 * return "BoardDTO [no=" + no + ", title=" + title + ", writer=" + writer +
-		 * ", createdDate=" + createdDate + ", count=" + count + ", body=" + body + "]";
-		 */
-		return "BoardDTO [title=" + title + ", writer=" + writer + ", createdDate=" + createdDate
+		return "BoardDTO [no=" + no + ", title=" + title + ", writer=" + writer + ", createdDate=" + createdDate
 				+ ", count=" + count + ", body=" + body + "]";
 	}
+
+
+
 	
 	
 	

@@ -8,8 +8,18 @@ public interface BoardMapper {
 
 	List<BoardDTO> selectAllBoardList();
 
-	/* int insertBoard(BoardDTO board); */
+	
 
 	void registBoard(BoardDTO board);
+
+	int insertBoard(BoardDTO board);
+
+
+
+	int incrementBoardCount(int no);
+
+
+
+	BoardDTO selectBoardDetail(int no);
 
 }

@@ -57,12 +57,12 @@
                     <tr>
                         <th width="200px" height="50px">작성일</th>
                         <td><input type="text" size="100" name="createdDate"></td>
-                       <!--  <td><input type="hidden" size="100" name="no"></td> -->
+                       
                     </tr>
                     <tr>
                         <th width="200px" height="545px">내용</th>
                         <td><textarea name="body" cols="60" rows="15"  style="resize:none;" required></textarea></td>
-                        
+                         <td><input type="hidden" size="100" name="no"></td> 
                     </tr>
     
                 </table>

@@ -12,4 +12,10 @@ public interface BoardService {
 
 	void registBoard(BoardDTO board) throws BoardRegistException;
 
+
+	void insertBoard(BoardDTO board);
+
+
+	BoardDTO selectBoardDetail(int no);
+
 }
