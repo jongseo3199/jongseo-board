@@ -6,7 +6,7 @@
               
   <resultMap type="BoardDTO" id="boardResultMap">
               
-         <id property="no" column="BBRD_NO"/>     
+         <!-- <id property="no" column="BBRD_NO"/>      -->
          <result property="title" column="BBRD_TTL"/>
          <result property="writer" column="BBRD_WRTER"/>
          <result property="createdDate" column="BBRD_DATE"/>
@@ -18,8 +18,8 @@
                      
   <select id="selectAllBoardList" resultMap="boardResultMap">
         SELECT
-               A.BBRD_NO
-             , A.BBRD_TTL
+               <!-- A.BBRD_NO -->
+               A.BBRD_TTL
              , A.BBRD_WRTER
              , A.BBRD_DATE
              , A.BBRD_CNT
@@ -33,16 +33,16 @@
         INSERT 
           INTO BBRD A 
          (
-             A.BBRD_NO
-           , A.BBRD_TTL
+            
+            A.BBRD_TTL
            , A.BBRD_WRTER
            , A.BBRD_DATE
            , A.BBRD_CNT
          )
          VALUES
          (
-            SEQ_BBRD_NO.NEXTBAL
-          , #{ title }
+           
+            #{ title }
           , #{ writer }
           , #{ createdDate }
           , #{ body }

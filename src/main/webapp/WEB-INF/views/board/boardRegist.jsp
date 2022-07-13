@@ -25,6 +25,9 @@
 		}
 	}
 	
+	function aa(){
+		document.f.submit();
+	}
 	
 
 </script>
@@ -40,7 +43,7 @@
 
         <div class="board">
 
-            <form action="${ pageContext.servletContext.contextPath }/board/boardRegist" method="post">
+            <form action="/board/regist" name="f" method="post">
                 <table align="center" id="listArea">
 
                     <tr>
@@ -54,7 +57,7 @@
                     <tr>
                         <th width="200px" height="50px">작성일</th>
                         <td><input type="text" size="100" name="createdDate"></td>
-                        <td><input type="hidden" size="100" name="no"></td>
+                       <!--  <td><input type="hidden" size="100" name="no"></td> -->
                     </tr>
                     <tr>
                         <th width="200px" height="545px">내용</th>
@@ -69,7 +72,8 @@
 
         <div class="button" align="center">
             
-            <button class="btn btn-left" type="submit">등록하기</button> 
+             <!-- <button class="btn btn-left" type="submit">등록하기</button> --> 
+            <button class="btn btn-left" type="button" onclick="aa();">등록하기</button>
             <button class="btn btn-right " type="button" onclick="location.href='${ pageContext.servletContext.contextPath }/board/list'">돌아가기</button>  
         </div>
 
