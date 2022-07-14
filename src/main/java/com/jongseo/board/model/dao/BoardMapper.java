@@ -21,4 +21,8 @@ public interface BoardMapper {
 
 	int incrementBoardCount(String writer);
 
+
+
+	int updateBoard(BoardDTO board);
+
 }

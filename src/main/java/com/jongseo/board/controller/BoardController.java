@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.jongseo.board.exception.BoardModifyException;
 import com.jongseo.board.exception.BoardRegistException;
 import com.jongseo.board.model.dto.BoardDTO;
 import com.jongseo.board.model.service.BoardService;
@@ -64,10 +66,6 @@ public class BoardController {
 	}
 	
 	
-	
-	
-	
-	
 	 
 	 @RequestMapping(value="regist", method=RequestMethod.POST)
 	 public String registBoard(BoardDTO board, RedirectAttributes rttr) throws BoardRegistException {
@@ -99,10 +97,39 @@ public class BoardController {
 			
 			model.addAttribute("board", boardDetail);
 			
-			System.out.println("컨트롤러에 있는값");
+			System.out.println();
 			
 			return "/board/boardDetail";
 		}
 	
 	
+	 
+	 /*
+	  * 게시판 수정하기
+	  * 
+	  * */
+	 @RequestMapping(value="update", method=RequestMethod.GET)
+	 public String modifyBoard(@RequestParam String writer, Model model) {
+			
+			BoardDTO board = boardService.selectBoardDetail(writer);
+			
+			model.addAttribute("board", board);
+			
+			return "/board/boardUpdate";
+		}
+	 
+	 
+	 @RequestMapping(value="update", method=RequestMethod.POST)
+	public String modifyBoard(@ModelAttribute BoardDTO board, RedirectAttributes rttr) throws BoardModifyException {
+			
+			System.out.println("board : " + board);
+			
+			boardService.modifyBoard(board);
+			
+			rttr.addFlashAttribute("message", "공지사항 수정에 성공하셨습니다!");
+			
+			return "redirect:/board/list";
+		}
+	 
+	 
 }

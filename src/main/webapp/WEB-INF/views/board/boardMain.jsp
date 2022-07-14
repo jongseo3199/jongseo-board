@@ -83,7 +83,7 @@
 			}
 			
 			$tds[i].onmouseout = function() {
-				this.parentNode.style.backgroundColor = "white";
+				this.parentNode.style.backgroundColor = "";
 			}
 			
 			$tds[i].onclick = function() {

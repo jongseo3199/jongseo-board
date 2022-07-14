@@ -10,13 +10,20 @@
 <link href="${pageContext.request.contextPath}/resources/css/reset.css" rel="stylesheet" type="text/css">
 <link href="${pageContext.request.contextPath}/resources/css/board-detail.css" rel="stylesheet" type="text/css">
 
+<script>
+function aa(){
+	document.f.submit();
+}
+</script>
+
+
 <body>
     <div class="main">
         <h2 align="center">게시글 상세보기</h2>
 
         <div class="board">
 
-            <form>
+           <form action="/board/update" name="f" method="post">
                 <table align="center" id="listArea">
 
                     <tr>
@@ -47,8 +54,8 @@
         </div>
         <div class="button" align="center">
             
-            <button class="btn btn-left" type="submit">수정</button> 
-            <button class="btn btn-mid " type="button">삭제</button>  
+            <button class="btn btn-left" onclick="aa();">수정하기</button>
+			<button class="btn btn-mid" onclick="aa();">삭제하기</button>
             <button class="btn btn-right " type="button" onclick="location.href='${ pageContext.servletContext.contextPath }/board/list'">돌아가기</button>  
         </div>
 

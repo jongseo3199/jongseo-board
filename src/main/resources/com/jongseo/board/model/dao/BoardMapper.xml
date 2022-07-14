@@ -64,7 +64,7 @@
   		       BBRD
   		   SET 
   		       BBRD_CNT = BBRD_CNT +1
-  		 WHERE BBRD_WRTER = #{ writer }
+  		 WHERE BBRD_WRTER = #{ WRITER }
   	</update>
   
   
@@ -79,6 +79,19 @@
           FROM BBRD 
   
   </select>
+  
+  
+  
+  
+  <update id="updateBoard" parameterType="BoardDTO">
+  		UPDATE 
+  		       BBRD
+  		   SET BBRD_TTL = #{ title }
+  		     , BBRD_CONTS = #{ body }
+  		 WHERE BBRD_WRTER = #{ writer }
+  	</update>
+  
+  
   
   
   
