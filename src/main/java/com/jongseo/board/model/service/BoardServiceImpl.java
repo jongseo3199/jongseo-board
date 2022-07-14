@@ -74,18 +74,23 @@ public class BoardServiceImpl implements BoardService {
 	 * 게시판 상세보기
 	 * */
 	@Override
-	public BoardDTO selectBoardDetail(int no) {
+	public BoardDTO selectBoardDetail(String writer) {
 		
+		System.out.println("상세보기 입니다.");
 		BoardDTO boardDetail = null;
 		
-		int result = mapper.incrementBoardCount(no);
+		int result = mapper.incrementBoardCount(writer);
 		
 		if(result > 0) {
-			boardDetail = mapper.selectBoardDetail(no);
+			boardDetail = mapper.selectBoardDetail(writer);
 		}
 		
+		
+		System.out.println("상세보기 입니다2");
 		return boardDetail;
 	}
+
+	
 	
 	
 }

@@ -16,6 +16,11 @@ public interface BoardService {
 	void insertBoard(BoardDTO board);
 
 
-	BoardDTO selectBoardDetail(int no);
+	BoardDTO selectBoardDetail(String writer);
+
+
+	
+
+	
 
 }

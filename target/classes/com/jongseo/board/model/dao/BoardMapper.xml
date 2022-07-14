@@ -31,17 +31,16 @@
   <insert id="insertBoard" parameterType="BoardDTO">
   
         INSERT 
-          INTO BBRD A 
-         (
-             A.BBRD_NO
-           , A.BBRD_TTL
-           , A.BBRD_WRTER
-           , A.BBRD_DATE
-           , A.BBRD_CNT
+          INTO BBRD 
+         (   BBRD_NO
+           , BBRD_TTL
+           , BBRD_WRTER
+           , BBRD_DATE
+           , BBRD_CONTS
          )
          VALUES
          (
-            SEQ_BBRD_NO.NEXTBAL
+             BBRD_NO.NEXTVAL
           , #{ title }
           , #{ writer }
           , #{ createdDate }
@@ -53,12 +52,35 @@
                      
   
   
-  <update id="incrementNoticeCount" parameterType="_int">
+ <!--  <update id="incrementNoticeCount" parameterType="_int">
   		UPDATE BOARD
   		  SET BBRD_CNT = BBRD_CNT +1
   		  WHERE BBRD_NO = #{ no }   
   		  
+  	</update> -->
+  
+  <update id="incrementBoardCount" parameterType="String">
+  		UPDATE 
+  		       BBRD
+  		   SET 
+  		       BBRD_CNT = BBRD_CNT +1
+  		 WHERE BBRD_WRTER = #{ writer }
   	</update>
+  
+  
+  
+  <select id="selectBoardDetail" parameterType="String" resultMap="boardResultMap"> 
+     
+        SELECT
+                BBRD_TTL
+              , BBRD_WRTER
+              , BBRD_DATE
+              , BBRD_CONTS
+          FROM BBRD 
+  
+  </select>
+  
+  
   
   
   

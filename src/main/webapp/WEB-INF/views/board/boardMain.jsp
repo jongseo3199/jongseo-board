@@ -7,14 +7,6 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 
-<script>
-
-	/* 비지니스 로직 성공 alert 메시지 처리 */
-	const message = '${ requestScope.message }';
-	if(message != null && message !== '') {
-		alert(message);
-	}
-</script>
 
 <link href="${pageContext.request.contextPath}/resources/css/reset.css" rel="stylesheet" type="text/css">
 <link href="${pageContext.request.contextPath}/resources/css/board-main.css" rel="stylesheet" type="text/css">
@@ -38,7 +30,7 @@
                         <th width="400px">등록일</th>
                         <th width="100px">조회수</th>
                     </tr>
-                   <c:forEach items="${ boardList }" var="board">
+                   <c:forEach items="${ boardList }" var="board" >
 					<tr>
 					    <td><c:out value="${ board.no }" /></td> 
 						<td><c:out value="${ board.title }" /></td>
@@ -69,5 +61,41 @@
        <jsp:include page="../board/paging.jsp" />
     </div>
 
+
+<script>
+
+	/* 비지니스 로직 성공 alert 메시지 처리 */
+	const message = '${ requestScope.message }';
+	if(message != null && message !== '') {
+		alert(message);
+	}
+	
+
+	
+	
+	if(document.querySelectorAll("#listArea td")) {
+		const $tds = document.querySelectorAll("#listArea td");
+		for(let i = 0; i < $tds.length; i++) {
+			
+			$tds[i].onmouseenter = function() {
+				this.parentNode.style.backgroundColor = "lightgray";
+				this.parentNode.style.cursor = "pointer";
+			}
+			
+			$tds[i].onmouseout = function() {
+				this.parentNode.style.backgroundColor = "white";
+			}
+			
+			$tds[i].onclick = function() {
+				const writer = this.parentNode.children[0].innerText;
+				location.href = "${ pageContext.servletContext.contextPath }/board/detail?writer=" + writer;
+			}
+		}
+	}
+</script>
+
 </body>
+
+
+
 </html>

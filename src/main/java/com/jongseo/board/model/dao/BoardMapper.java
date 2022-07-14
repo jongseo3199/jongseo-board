@@ -15,11 +15,10 @@ public interface BoardMapper {
 	int insertBoard(BoardDTO board);
 
 
-
-	int incrementBoardCount(int no);
-
+	BoardDTO selectBoardDetail(String writer);
 
 
-	BoardDTO selectBoardDetail(int no);
+
+	int incrementBoardCount(String writer);
 
 }

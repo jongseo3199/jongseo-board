@@ -29,13 +29,13 @@
                     </tr>
                     <tr>
                         <th width="200px" height="50px">작성일</th>
-                        <td><p><c:out value="${ requestScope.board.regist }"/></p></td>
+                        <td><p><c:out value="${ requestScope.board.createdDate }"/></p></td>
                     </tr>
                     <tr>
                         <th width="200px" height="545px">내용</th>
                         <td>
                           <textarea name="body" cols="60" rows="15"  style="resize:none;" required>
-                           <c:out value="${ requestScope.boatd.text }"/>
+                           <c:out value="${ requestScope.board.body }"/>
                           </textarea>
                         </td>
                         
@@ -49,7 +49,7 @@
             
             <button class="btn btn-left" type="submit">수정</button> 
             <button class="btn btn-mid " type="button">삭제</button>  
-            <button class="btn btn-right " type="button">이전</button>  
+            <button class="btn btn-right " type="button" onclick="location.href='${ pageContext.servletContext.contextPath }/board/list'">돌아가기</button>  
         </div>
 
      </div>

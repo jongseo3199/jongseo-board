@@ -70,48 +70,36 @@ public class BoardController {
 	
 	 
 	 @RequestMapping(value="regist", method=RequestMethod.POST)
-	 public String registBoard(BoardDTO board, RedirectAttributes rttr) throws
-	  BoardRegistException {
+	 public String registBoard(BoardDTO board, RedirectAttributes rttr) throws BoardRegistException {
 	  
-	  System.out.println("값 1111:");
-	  
-	  int no = board.getNo();
+	  System.out.println("등록페이지");
 	  
 	  boardService.registBoard(board);
 	  
 	  rttr.addFlashAttribute("message", "공지사항 등록에 성공하셨습니다.");
 	  
-	  return "/board/list";
+	  return "/board/Main";
 	  
 	  
 	  }
 	 
 	
-	/*
-	 * @RequestMapping(value="regist", method=RequestMethod.POST) public
-	 * ModelAndView registBoard(BoardDTO board) throws Exception { ModelAndView mav
-	 * = new ModelAndView("redirect:/board/list"); boardService.insertBoard(board);
-	 * return mav;
-	 * 
-	 * }
-	 */
-	
-	 
-	 
 	 
 	 
 	 /*
 	  * 게시글 상세 보기
 	  * 
 	  * */
-	 @RequestMapping(value="detail", method=RequestMethod.POST)
-	 public String selectBoardDetail(@RequestParam int no, Model model) {
+	 @RequestMapping(value="detail", method=RequestMethod.GET)
+	 public String selectBoardDetail(@RequestParam String writer, Model model) {
 			
-			System.out.println("no : " + no);
+			System.out.println(" 값: " + writer);
 			
-			BoardDTO boardDetail = boardService.selectBoardDetail(no);
+			BoardDTO boardDetail = boardService.selectBoardDetail(writer);
 			
-			model.addAttribute("detail", boardDetail);
+			model.addAttribute("board", boardDetail);
+			
+			System.out.println("컨트롤러에 있는값");
 			
 			return "/board/boardDetail";
 		}
