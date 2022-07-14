@@ -97,7 +97,7 @@ public class BoardController {
 			
 			model.addAttribute("board", boardDetail);
 			
-			System.out.println();
+			System.out.println( "값 4444");
 			
 			return "/board/boardDetail";
 		}

@@ -24,5 +24,8 @@ public interface BoardMapper {
 
 
 	int updateBoard(BoardDTO board);
+	
+	// 게시물 총 갯수
+	public int count() throws Exception;
 
 }

@@ -15,6 +15,9 @@
  
   </resultMap>       
                     
+  
+                
+                
                      
   <select id="selectAllBoardList" resultMap="boardResultMap">
         SELECT

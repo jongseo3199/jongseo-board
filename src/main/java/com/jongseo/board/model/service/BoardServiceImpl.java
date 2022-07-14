@@ -21,6 +21,8 @@ public class BoardServiceImpl implements BoardService {
 		this.mapper = mapper;
 	}
 	
+	
+	
 	/*
 	 * <pre>
 	 * 게시판 전체 목록 조회용
@@ -79,6 +81,7 @@ public class BoardServiceImpl implements BoardService {
 			boardDetail = mapper.selectBoardDetail(writer);
 		}
 		
+		System.out.println("결과 값" + result);
 		System.out.println("상세보기 입니다2");
 		return boardDetail;
 	}
