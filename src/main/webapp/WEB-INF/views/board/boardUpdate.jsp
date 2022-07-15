@@ -1,36 +1,52 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<jsp:directive.page language="java"
+	contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" />
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+
+<script>
+
+				/* ë¹„ì§€ë‹ˆìŠ¤ ë¡œì§ ì„±ê³µ alert ë©”ì‹œì§€ ì²˜ë¦¬ */
+				const message = '${ requestScope.message }';
+				if(message != null && message !== '') {
+					alert(message);
+				}
+				function aa(){
+					document.f.submit();
+		
+			}
+				
+</script>
 </head>
 <link href="${pageContext.request.contextPath}/resources/css/reset.css" rel="stylesheet" type="text/css">
 <link href="${pageContext.request.contextPath}/resources/css/board-update.css" rel="stylesheet" type="text/css">
 <body>
     <div class="main">
-        <h2 align="center">°Ô½Ã±Û ¼öÁ¤</h2>
+        <h2 align="center">ê²Œì‹œê¸€ ìˆ˜ì •</h2>
 
         <div class="board">
 
-            <form action="${ pageContext.servletContext.contextPath }/board/update" method="post">
+            <form action="/board/update" name="f" method="post">
                 <table align="center" id="listArea">
 
                     <tr>
-                        <th width="200px" height="50px">Á¦¸ñ</th>
+                        <th width="200px" height="50px">ì œëª©</th>
                         <td><input type="text" align="center" size="100" name="title" value="${ requestScope.board.title }"></td>
                     </tr>
                     <tr>
-                        <th width="200px" height="50px">ÀÛ¼ºÀÚ</th>
+                        <th width="200px" height="50px">ì‘ì„±ì</th>
                         <td><p><c:out value="${ requestScope.board.writer }"/></p></td>
                     </tr>
                     <tr>
-                        <th width="200px" height="50px">ÀÛ¼ºÀÏ</th>
-                        <td><input type="text" size="100" name="date" value="${ requestScope.board.regist }"/></td>
+                        <th width="200px" height="50px">ì‘ì„±ì¼</th>
+                        <td><p><c:out value="${ requestScope.board.createdDate }"/></p></td>
                     </tr>
+                   
                     <tr>
-                        <th width="200px" height="545px">³»¿ë</th>
+                        <th width="200px" height="545px">ë‚´ìš©</th>
                         <td><textarea name="body" cols="60" rows="15"  style="resize:none;" required><c:out value="${ requestScope.board.body }"/></textarea></td>
                         
                     </tr>
@@ -41,11 +57,11 @@
         </div>
         <div class="button" align="center">
             
-            <button class="btn btn-left" type="submit">ÀúÀå</button> 
+            <button class="btn btn-left" type="submit" onclick="aa();">ì €ì¥</button> 
             
-            <button class="btn btn-right " type="button">ÀÌÀü</button>  
+            <button class="btn btn-right " type="button">ì´ì „</button>  
         </div>
  
-
+     </div>
 </body>
 </html>

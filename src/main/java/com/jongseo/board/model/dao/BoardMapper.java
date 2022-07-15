@@ -10,22 +10,32 @@ public interface BoardMapper {
 
 	
 
-	void registBoard(BoardDTO board);
+	
 
 	int insertBoard(BoardDTO board);
 
 
-	BoardDTO selectBoardDetail(String writer);
+	BoardDTO selectBoardDetail(int no);
 
 
 
-	int incrementBoardCount(String writer);
+	int incrementBoardCount(int no);
 
 
 
 	int updateBoard(BoardDTO board);
+
+
+
+
+	int deleteBoard(int no);
+
+
+
+
+
+	int removeBoard(int no);
 	
-	// 게시물 총 갯수
-	public int count() throws Exception;
+	
 
 }

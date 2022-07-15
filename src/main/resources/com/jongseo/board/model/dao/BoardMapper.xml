@@ -35,18 +35,16 @@
   
         INSERT 
           INTO BBRD 
-         (   BBRD_NO
-           , BBRD_TTL
+         (   
+             BBRD_TTL
            , BBRD_WRTER
-           , BBRD_DATE
            , BBRD_CONTS
          )
          VALUES
          (
-             BBRD_NO.NEXTVAL
-          , #{ title }
+            
+            #{ title }
           , #{ writer }
-          , #{ createdDate }
           , #{ body }
          )
   
@@ -55,47 +53,47 @@
                      
   
   
- <!--  <update id="incrementNoticeCount" parameterType="_int">
-  		UPDATE BOARD
-  		  SET BBRD_CNT = BBRD_CNT +1
-  		  WHERE BBRD_NO = #{ no }   
-  		  
-  	</update> -->
+
   
-  <update id="incrementBoardCount" parameterType="String">
+  <update id="incrementBoardCount" parameterType="_int">
   		UPDATE 
   		       BBRD
   		   SET 
   		       BBRD_CNT = BBRD_CNT +1
-  		 WHERE BBRD_WRTER = #{ WRITER }
+  		 WHERE BBRD_NO = #{ NO }
   	</update>
   
   
   
-  <select id="selectBoardDetail" parameterType="String" resultMap="boardResultMap"> 
+  <select id="selectBoardDetail" parameterType="_int" resultMap="boardResultMap"> 
      
         SELECT
                 BBRD_TTL
               , BBRD_WRTER
-              , BBRD_DATE
               , BBRD_CONTS
+              , BBRD_DATE
           FROM BBRD 
+          WHERE BBRD_NO = #{ NO }
   
   </select>
   
   
   
   
-  <update id="updateBoard" parameterType="BoardDTO">
+   <update id="updateBoard" parameterType="BoardDTO">
   		UPDATE 
   		       BBRD
   		   SET BBRD_TTL = #{ title }
   		     , BBRD_CONTS = #{ body }
-  		 WHERE BBRD_WRTER = #{ writer }
+  		 WHERE BBRD_NO = #{ no }
   	</update>
   
-  
-  
+  <delete id="removeBoard" parameterType="_int">
+  		DELETE 
+  		  FROM BBRD 
+  		 WHERE BBRD_NO = #{ NO }
+  	</delete>
+   
   
   
   

@@ -16,6 +16,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.jongseo.board.exception.BoardModifyException;
 import com.jongseo.board.exception.BoardRegistException;
+import com.jongseo.board.exception.BoardRemoveException;
 import com.jongseo.board.model.dto.BoardDTO;
 import com.jongseo.board.model.service.BoardService;
 
@@ -51,11 +52,6 @@ public class BoardController {
 	/*
 	 *  게시판 등록
 	 *  
-	 * */
-	/*
-	 * @GetMapping("/boardRegist") public void registBoard() {
-	 * 
-	 * System.out.println("게시글 작성 페이지"); }
 	 */
 	
 	@RequestMapping(value="boardRegist", method=RequestMethod.GET)
@@ -89,11 +85,11 @@ public class BoardController {
 	  * 
 	  * */
 	 @RequestMapping(value="detail", method=RequestMethod.GET)
-	 public String selectBoardDetail(@RequestParam String writer, Model model) {
+	 public String selectBoardDetail(@RequestParam int no, Model model) {
 			
-			System.out.println(" 값: " + writer);
+			System.out.println(" 값: " + no);
 			
-			BoardDTO boardDetail = boardService.selectBoardDetail(writer);
+			BoardDTO boardDetail = boardService.selectBoardDetail(no);
 			
 			model.addAttribute("board", boardDetail);
 			
@@ -108,10 +104,10 @@ public class BoardController {
 	  * 게시판 수정하기
 	  * 
 	  * */
-	 @RequestMapping(value="update", method=RequestMethod.GET)
-	 public String modifyBoard(@RequestParam String writer, Model model) {
+	 @RequestMapping(value="boardUpdate", method=RequestMethod.GET)
+	 public String modifyBoard(@RequestParam(defaultValue = "1") int no, Model model) {
 			
-			BoardDTO board = boardService.selectBoardDetail(writer);
+			BoardDTO board = boardService.selectBoardDetail(no);
 			
 			model.addAttribute("board", board);
 			
@@ -120,9 +116,9 @@ public class BoardController {
 	 
 	 
 	 @RequestMapping(value="update", method=RequestMethod.POST)
-	public String modifyBoard(@ModelAttribute BoardDTO board, RedirectAttributes rttr) throws BoardModifyException {
+	 public String modifyBoard(@ModelAttribute BoardDTO board, RedirectAttributes rttr) throws BoardModifyException {
 			
-			System.out.println("board : " + board);
+			System.out.println("board 값 확인: " + board);
 			
 			boardService.modifyBoard(board);
 			
@@ -130,6 +126,27 @@ public class BoardController {
 			
 			return "redirect:/board/list";
 		}
+	 
+	 
+	 
+	 
+	 /*
+	  * 게시판 삭제
+	  * 
+	  * */
+	    @RequestMapping(value="delete", method=RequestMethod.GET)
+		public String removeBoard(@RequestParam int no, RedirectAttributes rttr) throws BoardRemoveException {
+			
+	    	System.out.println("삭제값 1 :");
+			boardService.removeBoard(no);
+			
+			System.out.println("삭제값 2 :");
+			rttr.addFlashAttribute("message", "공지사항 삭제에 성공하였습니다.");
+			
+			
+			return "redirect:/board/list";
+		}
+	 
 	 
 	 
 }

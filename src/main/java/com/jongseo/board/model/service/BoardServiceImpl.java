@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.jongseo.board.exception.BoardModifyException;
 import com.jongseo.board.exception.BoardRegistException;
+import com.jongseo.board.exception.BoardRemoveException;
 import com.jongseo.board.model.dao.BoardMapper;
 import com.jongseo.board.model.dto.BoardDTO;
 
@@ -70,19 +71,19 @@ public class BoardServiceImpl implements BoardService {
 	 * 게시판 상세보기
 	 * */
 	@Override
-	public BoardDTO selectBoardDetail(String writer) {
+	public BoardDTO selectBoardDetail(int no) {
 		
 		System.out.println("상세보기 입니다.");
 		BoardDTO boardDetail = null;
 		
-		int result = mapper.incrementBoardCount(writer);
+		int result = mapper.incrementBoardCount(no);
 		
 		if(result > 0) {
-			boardDetail = mapper.selectBoardDetail(writer);
+			boardDetail = mapper.selectBoardDetail(no);
 		}
 		
-		System.out.println("결과 값" + result);
-		System.out.println("상세보기 입니다2");
+		System.out.println("상세보기값 :" + result);
+		
 		return boardDetail;
 	}
 
@@ -93,14 +94,42 @@ public class BoardServiceImpl implements BoardService {
 	 * */
 	@Override
 	public void modifyBoard(BoardDTO board) throws BoardModifyException {
+		System.out.println("수정값 확인");
 		
 		int result = mapper.updateBoard(board);
-		
+			
 		if(!(result > 0)) {
 			
+			System.out.println(" 수정결과 값 :" + result);
 			throw new BoardModifyException("공지사항 수정에 실패하셨습니다.");
 		}
 	}
+
+
+
+	/*
+	 * 게시글 삭제
+	 * 
+	 * */
+	@Override
+	public void removeBoard(int no) throws BoardRemoveException {
+		
+
+		int result = mapper.removeBoard(no);
+		
+		
+		if(!(result > 0)) {
+			
+		System.out.println(" 결과 값 :" + result);
+		throw new BoardRemoveException("삭제에 실패하셨습니다.");
+		
+		}
+		
+	}
+
+
+
+
 	
 	
 }

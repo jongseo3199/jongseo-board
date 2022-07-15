@@ -11,10 +11,19 @@
 <link href="${pageContext.request.contextPath}/resources/css/board-detail.css" rel="stylesheet" type="text/css">
 
 <script>
-function aa(){
-	document.f.submit();
-}
+		function aa(){
+			document.f.submit();
+		}
+		
+		
+		/* 삭제 버튼 */
+		$("#delete_btn").on("click", function(e){
+		    form.attr("action", "/board/delete");
+		    form.attr("method", "post");
+		    form.submit();
+		});
 </script>
+
 
 
 <body>
@@ -38,6 +47,7 @@ function aa(){
                         <th width="200px" height="50px">작성일</th>
                         <td><p><c:out value="${ requestScope.board.createdDate }"/></p></td>
                     </tr>
+                 
                     <tr>
                         <th width="200px" height="545px">내용</th>
                         <td>
@@ -54,8 +64,9 @@ function aa(){
         </div>
         <div class="button" align="center">
             
-            <button class="btn btn-left" onclick="aa();">수정하기</button>
-			<button class="btn btn-mid" onclick="aa();">삭제하기</button>
+            <button class="btn btn-left" onclick="location.href='${ pageContext.servletContext.contextPath }/board/boardUpdate'">수정하기</button>
+			<a href="/board/delete?no=${board.no}">삭제</a>
+			 
             <button class="btn btn-right " type="button" onclick="location.href='${ pageContext.servletContext.contextPath }/board/list'">돌아가기</button>  
         </div>
 

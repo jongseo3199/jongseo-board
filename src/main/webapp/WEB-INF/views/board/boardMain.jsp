@@ -18,7 +18,7 @@
 
     <div class="main">
 
-        <h2 align="center">게시글 목록</h2>
+        <h2 align="center">게시글 목록입니다</h2>
         <div class="board">
             <form>
 
@@ -87,8 +87,8 @@
 			}
 			
 			$tds[i].onclick = function() {
-				const writer = this.parentNode.children[0].innerText;
-				location.href = "${ pageContext.servletContext.contextPath }/board/detail?writer=" + writer;
+				const no = this.parentNode.children[0].innerText;
+				location.href = "${ pageContext.servletContext.contextPath }/board/detail?no=" + no;
 			}
 		}
 	}
