@@ -4,6 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+
 <meta charset="UTF-8">
 <title>Insert title here</title>
 
@@ -11,6 +12,7 @@
 <link href="${pageContext.request.contextPath}/resources/css/reset.css" rel="stylesheet" type="text/css">
 <link href="${pageContext.request.contextPath}/resources/css/board-main.css" rel="stylesheet" type="text/css">
 <script src="${ pageContext.servletContext.contextPath }/resources/js/event.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
 </head>
 <body>
@@ -43,22 +45,39 @@
             </form>
      
         </div>
-
-        <div class="search-area" align="center">
-
-            <select id="searchCondition" name="searchCondition">
-                <option value="writer">작성자</option>
-                <option value="title">제목</option>
-                <option value="contents">내용</option>
-            </select> <input type="search">
-            <button class="btn btn-left" type="submit">검색하기</button>       
-            <button class="btn btn-right"  onclick="location.href='${ pageContext.servletContext.contextPath }/board/boardRegist'">작성하기</button>
-
-        </div>
-
+        
         <!-- 페이징 처리 -->
         
        <jsp:include page="../board/paging.jsp" />
+
+        <!-- 검색기능 -->
+		<div class="search-area" align="center">
+			<form id="loginForm"
+				action="${ pageContext.servletContext.contextPath }/board/list"
+				method="get" style="display: inline-block">
+				<input type="hidden" name="currentPage" value="1">
+				 <select id="searchCondition" name="searchCondition">
+					
+					<option value="writer"
+						${ requestScope.selectCriteria.searchCondition eq 'writer'? 'selected': '' }>작성자</option>
+					<option value="title"
+						${ requestScope.selectCriteria.searchCondition eq 'title'? 'selected': '' }>제목</option>
+					<option value="body"
+						${ requestScope.selectCriteria.searchCondition eq 'body'? 'selected': '' }>내용</option>
+				</select> 
+				<input type="search" id="searchValue" size=18 name="searchValue" value="
+				   <c:out value="${ requestScope.selectCriteria.searchValue }"/>">
+
+				<button class="btn btn-bs" type="submit">검색하기</button>
+				
+			</form>
+			 <button class="btn btn-right"  onclick="location.href='${ pageContext.servletContext.contextPath }/board/boardRegist'">작성하기</button>
+			
+		</div>	
+              <%-- <button class="btn btn-right"  onclick="location.href='${ pageContext.servletContext.contextPath }/board/boardRegist'">작성하기</button> --%>
+        
+        
+        
     </div>
 
 
@@ -92,6 +111,34 @@
 			}
 		}
 	}
+	
+	
+	
+	
+	
+</script>
+
+<script>
+$(document).ready(function(){
+    
+    let result = '<c:out value="${result}"/>';
+    
+    checkAlert(result);
+    
+    function checkAlert(result){
+        
+        if(result === ''){
+            reutrn;
+        }
+        
+        if(result === "enrol success"){
+            alert("등록이 완료되었습니다.");
+        }
+        
+    }    
+    
+});
+
 </script>
 
 </body>

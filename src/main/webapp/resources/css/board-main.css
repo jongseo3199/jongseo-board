@@ -2,13 +2,20 @@
 body {
     height: 1080px;
     width: 1920px;
+    
 }
 .board {
-    height: 700px;
+    height: 510px;
     width: 1300px;
     border: 1px solid black;
     margin-top: 100px;
     margin-left: 300px;
+    margin-bottom: 70px;
+    text-align: center;
+}
+
+h2 {
+	margin-top: 50px;
 }
 
 table th {
@@ -16,9 +23,19 @@ table th {
 }
 
 table{
-    background-color: antiquewhite;
+    background-color: #F5F5F5;
     height: 50px;
 }
 th, td {
     border: 1px solid black;
+}
+
+tr:nth-child(1){
+	background: #D3CBC0;;
+	padding: 20px 0 ;
+}
+
+.search-area{
+	
+	margin-top: 50px;
 }

@@ -32,12 +32,13 @@
 
         <div class="board">
 
-           <form action="/board/update" name="f" method="post">
+           
                 <table align="center" id="listArea">
 
                     <tr>
                         <th width="200px" height="50px">제목</th>
                         <td><p><c:out value="${ requestScope.board.title }"/></p></td>
+                       
                     </tr>
                     <tr>
                         <th width="200px" height="50px">작성자</th>
@@ -47,26 +48,30 @@
                         <th width="200px" height="50px">작성일</th>
                         <td><p><c:out value="${ requestScope.board.createdDate }"/></p></td>
                     </tr>
+                    <tr>
+                        <th width="200px" height="30px">게시물 번호</th>
+                        <td><p><c:out value="${ requestScope.board.no }"/></p></td>
+                    </tr>
                  
                     <tr>
-                        <th width="200px" height="545px">내용</th>
+                        <th width="200px" height="513px">내용</th>
                         <td>
-                          <textarea name="body" cols="60" rows="15"  style="resize:none;" required>
-                           <c:out value="${ requestScope.board.body }"/>
-                          </textarea>
+              
+                          <textarea style="resize:none; width:95%; height:460px;" style="resize:none;" readonly><c:out value="${ requestScope.board.body }"/></textarea>
                         </td>
                         
                     </tr>
-    
+                    
                 </table>
-            </form>
             
         </div>
         <div class="button" align="center">
             
-            <button class="btn btn-left" onclick="location.href='${ pageContext.servletContext.contextPath }/board/boardUpdate'">수정하기</button>
-			<a href="/board/delete?no=${board.no}">삭제</a>
-			 
+            <button class="btn btn-left" onclick="location.href='${ pageContext.servletContext.contextPath }/board/update?no=${ requestScope.board.no }'">수정하기</button>
+           
+            
+			<button class="btn btn-bs" onclick="location.href='${ pageContext.servletContext.contextPath }/board/delete?no=${ requestScope.board.no }'">삭제하기</button>
+			
             <button class="btn btn-right " type="button" onclick="location.href='${ pageContext.servletContext.contextPath }/board/list'">돌아가기</button>  
         </div>
 

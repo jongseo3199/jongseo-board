@@ -15,11 +15,83 @@
  
   </resultMap>       
                     
-  
+  <select id="selectTotalCount" resultType="_int" parameterType="hashmap">
+  		SELECT 
+  			   COUNT(*)
+  	      FROM BBRD A
+  	     
+  	      
+  	      <where>
+  	      	
+  	      	<if test="searchCondition == 'writer'">
+  	      		A.BBRD_WRTER LIKE '%' || #{ searchValue } || '%'
+  	      	</if>
+  	      	 	<if test="searchCondition == 'title'">
+  	      		A.BBRD_TTL LIKE '%' || #{ searchValue } || '%'
+  	      	</if>
+  	      	 	<if test="searchCondition == 'body'">
+  	      		A.BBRD_CONTS LIKE '%' || #{ searchValue } || '%'
+  	      	</if>
+  	         
+  	      </where>
+  	</select>
+                
+           
+                
+       <select id="selectBoardList" resultMap="boardResultMap">
+       
+	    SELECT A.RNUM
+             , A.BBRD_NO
+             , A.BBRD_TTL
+             , A.BBRD_WRTER
+             , A.BBRD_DATE
+             , A.BBRD_CNT
+			   FROM(SELECT ROWNUM RNUM
+			             , B.BBRD_NO
+			             , B.BBRD_TTL
+			             , B.BBRD_WRTER
+			             , B.BBRD_DATE
+			             , B.BBRD_CNT                    
+							        FROM(SELECT
+							               C.BBRD_NO
+							             , C.BBRD_TTL
+							             , C.BBRD_WRTER
+							             , C.BBRD_DATE
+							             , C.BBRD_CNT
+							          FROM BBRD C
+                        <where>
+				  	     <if test="searchCondition == 'writer'">
+				  	      		C.BBRD_WRTER LIKE '%' || #{ searchValue } || '%'
+				  	       </if>
+				  	       <if test="searchCondition == 'title'">
+				  	      		C.BBRD_TTL LIKE '%' || #{ searchValue } || '%'
+				  	       </if>
+				  	       <if test="searchCondition == 'body'">
+				  	      		C.BBRD_CONTS LIKE '%' || #{ searchValue } || '%'
+				  	      </if>		
+				  	    </where>
+                          ORDER BY C.BBRD_NO DESC 
+				  	     ) B
+                      <![CDATA[
+				         WHERE ROWNUM <= #{ endRow }
+				      ]]>
+				      ) A
+		            
+		        <![CDATA[
+		          WHERE A.RNUM >= #{ startRow }
+		           ]]>
+		        ORDER BY 1 ASC
+       
+       
+       
+       </select>         
+                
+                
+                
                 
                 
                      
-  <select id="selectAllBoardList" resultMap="boardResultMap">
+<!--   <select id="selectAllBoardList" resultMap="boardResultMap">
         SELECT
                A.BBRD_NO
              , A.BBRD_TTL
@@ -29,21 +101,22 @@
           FROM BBRD A
          
 
-  </select>      
+  </select>       -->
   
   <insert id="insertBoard" parameterType="BoardDTO">
   
         INSERT 
           INTO BBRD 
          (   
-             BBRD_TTL
+             BBRD_NO
+           , BBRD_TTL
            , BBRD_WRTER
            , BBRD_CONTS
          )
          VALUES
          (
-            
-            #{ title }
+            BBRD_NO.NEXTVAL
+          , #{ title }
           , #{ writer }
           , #{ body }
          )
@@ -60,7 +133,7 @@
   		       BBRD
   		   SET 
   		       BBRD_CNT = BBRD_CNT +1
-  		 WHERE BBRD_NO = #{ NO }
+  		 WHERE BBRD_NO = #{ no }
   	</update>
   
   
@@ -68,12 +141,13 @@
   <select id="selectBoardDetail" parameterType="_int" resultMap="boardResultMap"> 
      
         SELECT
-                BBRD_TTL
+                BBRD_NO
+              , BBRD_TTL
               , BBRD_WRTER
               , BBRD_CONTS
               , BBRD_DATE
           FROM BBRD 
-          WHERE BBRD_NO = #{ NO }
+          WHERE BBRD_NO = #{ no }
   
   </select>
   
@@ -82,16 +156,20 @@
   
    <update id="updateBoard" parameterType="BoardDTO">
   		UPDATE 
-  		       BBRD
-  		   SET BBRD_TTL = #{ title }
+  		       BBRD 
+  		   SET 
+  		       BBRD_NO = #{ no }
+  		     , BBRD_TTL = #{ title }
   		     , BBRD_CONTS = #{ body }
   		 WHERE BBRD_NO = #{ no }
   	</update>
+  	
+  	
   
   <delete id="removeBoard" parameterType="_int">
   		DELETE 
   		  FROM BBRD 
-  		 WHERE BBRD_NO = #{ NO }
+  		 WHERE BBRD_NO = #{ no }
   	</delete>
    
   
